@@ -1,28 +1,50 @@
 #include <stdio.h>
 
-int max(int a, int b, int c) {
+int main() {
+    int n, m, i, j;
+    scanf("%d%d", &n, &m);
+    int a[100][100];
 
-    if(a == 0 && b == 0 && c == 0) {
+    if(n > 100 && m > 100) {
         return 0;
     }
 
-    if(a >= b && a >= c) {
-        return a;
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < m; j++) {
+            scanf("%d", &a[i][j]);
+        }
     }
-    if(a < b) {
-        return max(b, a, c);
-    } else if(a < c) {
-        return max(c, a, b);
+
+    int max, maxi, maxj;
+
+    for(i = 0; i < n; i++) {
+        max = a[i][0];
+        for(j = 0; j < m; j++) {
+            if (a[i][j] > max)
+            {
+               max = a[i][j];
+               maxi = i;
+               maxj = j;
+            }
+            
+        }
     }
-    
-}
 
-int main() {
-    int a, b, c;
+    int sum = 0;
+    for(j = 0; j < m; j++) {
+        if(j != maxj) {
+            sum += a[maxi][j];
+        }
+    }
 
-    scanf("%d%d%d", &a, &b, &c);
+    a[maxi][maxj] = sum;
 
-    printf("%d", max(a, b, c));
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < m; j++) {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
